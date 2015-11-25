@@ -8,7 +8,7 @@
 
 
 # Android Studio
-.idea/
+.idea
 /*/local.properties
 /*/out
 /*/*/build
