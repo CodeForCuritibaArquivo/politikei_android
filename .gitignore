@@ -5,3 +5,16 @@
 .DS_Store
 /build
 /captures
+
+
+# Android Studio
+.idea/
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
