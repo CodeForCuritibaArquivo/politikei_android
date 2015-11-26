@@ -13,12 +13,18 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
-public class FragmentProjetosLei extends ListFragment  {
+public class FragmentProjetosLei extends ListFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -54,61 +60,45 @@ public class FragmentProjetosLei extends ListFragment  {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        this.listProjetoLei = new ArrayList<ProjetoLei>();
-        ProjetoLei projetoLei = new ProjetoLei();
-        projetoLei.setId(1L);
-        projetoLei.setStatus("Aguardando aprovação");
-        projetoLei.setTitulo("Projeto1");
-        projetoLei.setDescricao("\nauhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf ");
+        try {
+            String token = BusinessLogic.getInstance().getAccessToken();
+            new HttpRequestExecuter(new JSONObject()) {
+                @Override
+                protected void onPostExecute(String result) {
+                    Log.i(Utils.tag, result + "");
 
-        ProjetoLei projetoLei2 = new ProjetoLei();
-        projetoLei2.setId(2L);
-        projetoLei2.setStatus("Aguardando aprovação");
-        projetoLei2.setTitulo("Projeto2");
-        projetoLei2.setDescricao("\nauhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf ");
+                    if (result != null) {
+                        try {
+                            JSONArray json = new JSONArray(result);
+                            listProjetoLei = new ArrayList<ProjetoLei>();
 
-        ProjetoLei projetoLei3 = new ProjetoLei();
-        projetoLei3.setId(3L);
-        projetoLei3.setStatus("Aguardando aprovação");
-        projetoLei3.setTitulo("Projeto3");
-        projetoLei3.setDescricao("\nauhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf ");
+                            for (int i = 0; i < json.length(); i++) {
+                                JSONObject jsonobject = json.getJSONObject(i);
+                                ProjetoLei projetoLei = new ProjetoLei();
+                                projetoLei.setId(jsonobject.getInt("id"));
+                                projetoLei.setStatus(jsonobject.getString("situacao"));
+                                projetoLei.setTitulo(jsonobject.getString("nome"));
+                                projetoLei.setDescricao(jsonobject.getString("resumo"));
+                                listProjetoLei.add(projetoLei);
+                            }
+                            adapterListProjetoLei = new AdapterListProjetoLei(getActivity());
+                            setListAdapter(adapterListProjetoLei);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        //todo: mostrar erro
+                    }
+                }
+            }.execute("https://politikei-api.herokuapp.com/api/v1/proposicoes?token=" + token, "GET");
 
+        } catch (
+                Exception e
+                )
 
-        ProjetoLei projetoLei4 = new ProjetoLei();
-        projetoLei4.setId(4L);
-        projetoLei4.setStatus("Aguardando aprovação");
-        projetoLei4.setTitulo("Projeto4");
-        projetoLei4.setDescricao("\nauhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf ");
-
-        ProjetoLei projetoLei5 = new ProjetoLei();
-        projetoLei5.setId(5L);
-        projetoLei5.setStatus("Aguardando aprovação");
-        projetoLei5.setTitulo("Projeto5");
-        projetoLei5.setDescricao("\nauhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf\n" +
-                "auhuhauhau au uah ai ai au ai ai au ahiudhfiua iuaf ");
-
-        this.listProjetoLei.add(projetoLei);
-        this.listProjetoLei.add(projetoLei2);
-        this.listProjetoLei.add(projetoLei3);
-        this.listProjetoLei.add(projetoLei4);
-        this.listProjetoLei.add(projetoLei5);
-
-        adapterListProjetoLei = new AdapterListProjetoLei(this.getActivity());
-        setListAdapter(adapterListProjetoLei);
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -154,36 +144,29 @@ public class FragmentProjetosLei extends ListFragment  {
         startActivity(detailIntent);
     }
 
-    private ProjetoLei getProjetoLei(long id)
-    {
-        for(ProjetoLei projeto : listProjetoLei)
-        {
-            if(projeto.getId() == id)
-            {
+    private ProjetoLei getProjetoLei(long id) {
+        for (ProjetoLei projeto : listProjetoLei) {
+            if (projeto.getId() == id) {
                 return projeto;
             }
         }
         return null;
     }
 
-    private class AdapterListProjetoLei extends BaseAdapter
-    {
+    private class AdapterListProjetoLei extends BaseAdapter {
 
         // private ImageButton imageViewEnviarOlah;
         // private ImageButton imageViewLock;
         // private ProgressBar progressBarLock;
 
-        public AdapterListProjetoLei(Context context)
-        {
+        public AdapterListProjetoLei(Context context) {
             super();
         }
 
         @Override
-        public int getCount()
-        {
+        public int getCount() {
 
-            if (listProjetoLei != null)
-            {
+            if (listProjetoLei != null) {
                 Log.i(Utils.tag, "adapterListOlah count " + listProjetoLei.size());
                 return listProjetoLei.size();
             }
@@ -192,57 +175,48 @@ public class FragmentProjetosLei extends ListFragment  {
         }
 
         @Override
-        public Object getItem(int position)
-        {
+        public Object getItem(int position) {
             return listProjetoLei.get(position);
         }
 
         @Override
-        public long getItemId(int position)
-        {
+        public long getItemId(int position) {
             ProjetoLei projetoLei = listProjetoLei.get(position);
-            if(projetoLei != null)
-            {
+            if (projetoLei != null) {
                 return projetoLei.getId();
             }
             return -1;
         }
 
         @Override
-        public int getViewTypeCount()
-        {
+        public int getViewTypeCount() {
             // Two types of views, the normal ImageView and the top row of empty
             // views
             return 1;
         }
 
         @Override
-        public boolean hasStableIds()
-        {
+        public boolean hasStableIds() {
             return true;
         }
 
 
         @Override
-        public View getView(final int position, View convertView, ViewGroup container)
-        {
+        public View getView(final int position, View convertView, ViewGroup container) {
             Log.i(Utils.tag, "getView FragmentOlahs ");
             LinearLayout viewProjetoLei;
 
-            if (convertView == null)
-            {
+            if (convertView == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 viewProjetoLei = (LinearLayout) inflater.inflate(R.layout.fragment_projeto_lei, container, false);
-            }
-            else
-            {
+            } else {
                 viewProjetoLei = (LinearLayout) convertView;
             }
 
             final ProjetoLei projetoLei = (ProjetoLei) getItem(position);
 
-            TextView textViewProjetoLei = (TextView)viewProjetoLei.findViewById(R.id.textViewDescricaoProjetoLei);
-            TextView textViewProjetoLeiTitulo  = (TextView)viewProjetoLei.findViewById(R.id.textViewTituloProjetoLei);
+            TextView textViewProjetoLei = (TextView) viewProjetoLei.findViewById(R.id.textViewDescricaoProjetoLei);
+            TextView textViewProjetoLeiTitulo = (TextView) viewProjetoLei.findViewById(R.id.textViewTituloProjetoLei);
             textViewProjetoLei.setText(projetoLei.getDescricao());
             textViewProjetoLeiTitulo.setText(projetoLei.getTitulo());
 

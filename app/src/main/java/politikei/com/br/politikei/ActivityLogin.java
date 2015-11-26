@@ -18,8 +18,8 @@ public class ActivityLogin extends AppCompatActivity {
         try {
 
             JSONObject jsonLogin = new JSONObject();
-            jsonLogin.put("email", "jean.hhansen@gmail.com");
-            jsonLogin.put("password", "12345");
+            jsonLogin.put("email", "murilo.wlima@gmail.com");
+            jsonLogin.put("password", "murilo");
 
             new HttpRequestExecuter(jsonLogin) {
                 @Override

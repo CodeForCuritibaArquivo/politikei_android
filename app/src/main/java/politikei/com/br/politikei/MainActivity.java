@@ -2,6 +2,8 @@ package politikei.com.br.politikei;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,46 +17,42 @@ public class MainActivity extends AppCompatActivity implements FragmentProjetosL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(BusinessLogic.getInstance().getAccessToken() == null)
-        {
+        if (BusinessLogic.getInstance().getAccessToken() == null) {
             Intent intent = new Intent(this, ActivityLogin.class);
             startActivityForResult(intent, Utils.tagStartActivityLogin);
-        }
-        else
-        {
+        } else {
 //            if(savedInstanceState != null) {
-                init();
+            init();
 //            }
         }
     }
 
-    private void init()
-    {
+    private void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        new Handler().post(new Runnable() {
+            public void run() {
+                FragmentProjetosLei fragmentProjetoLei = new FragmentProjetosLei();
 
-        FragmentProjetosLei fragmentProjetoLei= new FragmentProjetosLei();
+                //ItemFragment fragment = new ItemFragment();
 
-//        ItemFragment fragment = new ItemFragment();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentList, fragmentProjetoLei);
-        fragmentTransaction.commit();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.fragmentList, fragmentProjetoLei);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 //        super.onActivityResult(resultCode, requestCode, intent);
 
 
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case Utils.tagStartActivityLogin:
-                if(resultCode == Activity.RESULT_OK)
-                {
+                if (resultCode == Activity.RESULT_OK) {
                     init();
                 }
         }
@@ -70,5 +68,4 @@ public class MainActivity extends AppCompatActivity implements FragmentProjetosL
 //        startActivity(detailIntent);
 
     }
-
 }
