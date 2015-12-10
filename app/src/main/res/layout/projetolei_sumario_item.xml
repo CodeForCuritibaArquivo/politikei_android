@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/projetolei_sumario_item_nome"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="PL 2015/34566"
+        android:textColor="@color/dark_green"/>
+    <TextView
+        android:id="@+id/projetolei_sumario_item_sumario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:maxLines="5"
+        android:text="the fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dogthe fox jumps over the lazy dog"
+        android:textColor="@color/dark_green"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/projetolei_sumario_item_sim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_red"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/white"
+            android:text="@string/a_favor"/>
+        <Button
+            android:id="@+id/projetolei_sumario_item_nao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_green"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/white"
+            android:text="@string/contra"/>
+        <Button
+            android:id="@+id/projetolei_sumario_item_lixo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            android:textColor="@android:color/white"
+            android:text="@string/lixo"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,6 +3,7 @@
     <string name="hello_blank_fragment">Projetos de Lei</string>
     <string name="a_favor">A favor</string>
     <string name="contra">Contra</string>
+    <string name="busca">Busca</string>
     <string name="nenhum_projeto">Nenhum Projeto</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
@@ -17,4 +18,12 @@
     <string name="plenario">Plenario</string>
     <string name="lixo">Lixo</string>
     <string name="autenticando">autenticando</string>
+
+    <string name="login_usuario_hint">Login</string>
+    <string name="login_senha_hint">Senha</string>
+    <string name="login_esqueceu_senha"><u>Esqueceu sua senha?</u></string>
+    <string name="login_entrar">Entrar</string>
+    <string name="login_registrar">Registrar</string>
+    <string name="login_facebook">Entrar com facebook</string>
+    <string name="login_error">Erro no login!\nVerifique seu login e tente novamente!</string>
 </resources>
