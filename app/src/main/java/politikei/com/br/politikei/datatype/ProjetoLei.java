@@ -1,4 +1,4 @@
-package politikei.com.br.politikei;
+package politikei.com.br.politikei.datatype;
 
 import java.io.Serializable;
 

@@ -6,23 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
-
-    <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
-        android:layout_height="wrap_content" android:layout_width="match_parent"
+    tools:context="politikei.com.br.politikei.MainActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/fragmentList"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </FrameLayout>
-
+        android:gravity="center">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/main_option1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textSize="50sp"
+                android:textColor="@android:color/white"
+                android:background="@color/blue"
+                android:text="@string/main_option1" />
+            <TextView
+                android:id="@+id/main_option2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textSize="50sp"
+                android:textColor="@android:color/white"
+                android:background="@color/yellow"
+                android:text="@string/main_option2" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/main_option3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textSize="50sp"
+                android:textColor="@android:color/white"
+                android:background="@color/green"
+                android:text="@string/main_option3" />
+            <TextView
+                android:id="@+id/main_option4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textSize="50sp"
+                android:textColor="@android:color/white"
+                android:background="@color/red"
+                android:text="@string/main_option4" />
+        </TableRow>
+    </TableLayout>
 </android.support.design.widget.CoordinatorLayout>

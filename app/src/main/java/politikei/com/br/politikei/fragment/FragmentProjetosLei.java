@@ -1,4 +1,4 @@
-package politikei.com.br.politikei;
+package politikei.com.br.politikei.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,15 +13,13 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import politikei.com.br.politikei.BusinessLogic;
+import politikei.com.br.politikei.R;
+import politikei.com.br.politikei.utils.Utils;
+import politikei.com.br.politikei.datatype.ProjetoLei;
 
 
 public class FragmentProjetosLei extends ListFragment {
@@ -62,35 +60,35 @@ public class FragmentProjetosLei extends ListFragment {
 
         try {
             String token = BusinessLogic.getInstance().getAccessToken();
-            new HttpRequestExecuter(new JSONObject()) {
-                @Override
-                protected void onPostExecute(String result) {
-                    Log.i(Utils.tag, result + "");
-
-                    if (result != null) {
-                        try {
-                            JSONArray json = new JSONArray(result);
-                            listProjetoLei = new ArrayList<ProjetoLei>();
-
-                            for (int i = 0; i < json.length(); i++) {
-                                JSONObject jsonobject = json.getJSONObject(i);
-                                ProjetoLei projetoLei = new ProjetoLei();
-                                projetoLei.setId(jsonobject.getInt("id"));
-                                projetoLei.setStatus(jsonobject.getString("situacao"));
-                                projetoLei.setTitulo(jsonobject.getString("nome"));
-                                projetoLei.setDescricao(jsonobject.getString("resumo"));
-                                listProjetoLei.add(projetoLei);
-                            }
-                            adapterListProjetoLei = new AdapterListProjetoLei(getActivity());
-                            setListAdapter(adapterListProjetoLei);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        //todo: mostrar erro
-                    }
-                }
-            }.execute("https://politikei-api.herokuapp.com/api/v1/proposicoes?token=" + token, "GET");
+//            new HttpRequestExecuter(new JSONObject()) {
+//                @Override
+//                protected void onPostExecute(String result) {
+//                    Log.i(Utils.tag, result + "");
+//
+//                    if (result != null) {
+//                        try {
+//                            JSONArray json = new JSONArray(result);
+//                            listProjetoLei = new ArrayList<ProjetoLei>();
+//
+//                            for (int i = 0; i < json.length(); i++) {
+//                                JSONObject jsonobject = json.getJSONObject(i);
+//                                ProjetoLei projetoLei = new ProjetoLei();
+//                                projetoLei.setId(jsonobject.getInt("id"));
+//                                projetoLei.setStatus(jsonobject.getString("situacao"));
+//                                projetoLei.setTitulo(jsonobject.getString("nome"));
+//                                projetoLei.setDescricao(jsonobject.getString("resumo"));
+//                                listProjetoLei.add(projetoLei);
+//                            }
+//                            adapterListProjetoLei = new AdapterListProjetoLei(getActivity());
+//                            setListAdapter(adapterListProjetoLei);
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        //todo: mostrar erro
+//                    }
+//                }
+//            }.execute("https://politikei-api.herokuapp.com/api/v1/proposicoes?token=" + token, "GET");
 
         } catch (
                 Exception e
@@ -106,7 +104,7 @@ public class FragmentProjetosLei extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_projetolei_list, container, false);
+        View view = inflater.inflate(R.layout.proposed_law_list, container, false);
         return view;
     }
 
@@ -208,7 +206,7 @@ public class FragmentProjetosLei extends ListFragment {
 
             if (convertView == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
-                viewProjetoLei = (LinearLayout) inflater.inflate(R.layout.fragment_projeto_lei, container, false);
+                viewProjetoLei = (LinearLayout) inflater.inflate(R.layout.proposed_law_details, container, false);
             } else {
                 viewProjetoLei = (LinearLayout) convertView;
             }
@@ -216,9 +214,9 @@ public class FragmentProjetosLei extends ListFragment {
             final ProjetoLei projetoLei = (ProjetoLei) getItem(position);
 
             TextView textViewProjetoLei = (TextView) viewProjetoLei.findViewById(R.id.textViewDescricaoProjetoLei);
-            TextView textViewProjetoLeiTitulo = (TextView) viewProjetoLei.findViewById(R.id.textViewTituloProjetoLei);
+           // TextView textViewProjetoLeiTitulo = (TextView) viewProjetoLei.findViewById(R.id.textViewTituloProjetoLei);
             textViewProjetoLei.setText(projetoLei.getDescricao());
-            textViewProjetoLeiTitulo.setText(projetoLei.getTitulo());
+           // textViewProjetoLeiTitulo.setText(projetoLei.getTitulo());
 
 
             return viewProjetoLei;

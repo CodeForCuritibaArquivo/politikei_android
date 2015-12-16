@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Politikei</string>
     <string name="hello_blank_fragment">Projetos de Lei</string>
+
+    <string name="app_id">921102801310369</string>
+
+    <string name="loading_title">Validando</string>
+    <string name="loading_msg">Verificando conta...</string>
+
     <string name="a_favor">A favor</string>
+    <string name="ok">OK</string>
     <string name="contra">Contra</string>
     <string name="busca">Busca</string>
     <string name="nenhum_projeto">Nenhum Projeto</string>
@@ -26,4 +33,12 @@
     <string name="login_registrar">Registrar</string>
     <string name="login_facebook">Entrar com facebook</string>
     <string name="login_error">Erro no login!\nVerifique seu login e tente novamente!</string>
+    <string name="login_retrieve_error">Erro ao resetar Password!\nVerifique seu email e tente novamente!</string>
+    <string name="login_retrieve_title">Resetar Password</string>
+    <string name="login_retrieve_msg">Um email foi enviado!\nPor favor siga as instruções do email.</string>
+
+    <string name="main_option1">Option1</string>
+    <string name="main_option2">Option2</string>
+    <string name="main_option3">Option3</string>
+    <string name="main_option4">Option4</string>
 </resources>

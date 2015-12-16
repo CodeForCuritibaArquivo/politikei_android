@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
@@ -20,15 +21,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityDetailProject"
+            android:name=".fragment.ActivityDetailProject"
             android:label="@string/title_activity_activity_detail_project"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="politikei.com.br.politikei.MainActivity" />
         </activity>
-        <activity android:name=".ActivityLogin" >
+        <activity
+            android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

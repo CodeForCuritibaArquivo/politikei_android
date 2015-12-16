@@ -1,35 +1,26 @@
 package politikei.com.br.politikei;
 
-/**
- * Created by Jean on 25/11/2015.
- */
-public class BusinessLogic
-{
+public class BusinessLogic {
+    private static BusinessLogic mInstance;
+    private String mAccessToken = null;
 
-    private static BusinessLogic businessLogic;
-    private String accessToken = null;
-
-    private BusinessLogic()
-    {
-
+    private BusinessLogic() {
     }
 
     public void setAccessToken(String token)
     {
-        this.accessToken = token;
+        this.mAccessToken = token;
     }
 
     public String getAccessToken()
     {
-        return this.accessToken;
+        return this.mAccessToken;
     }
 
-    public static BusinessLogic getInstance()
-    {
-        if(businessLogic == null)
-        {
-            businessLogic = new BusinessLogic();
+    public static BusinessLogic getInstance() {
+        if(mInstance == null) {
+            mInstance = new BusinessLogic();
         }
-        return businessLogic;
+        return mInstance;
     }
 }
