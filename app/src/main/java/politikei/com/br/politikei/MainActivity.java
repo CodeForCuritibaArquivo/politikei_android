@@ -9,8 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 
+import io.fabric.sdk.android.Fabric;
 import politikei.com.br.politikei.activity.LoginActivity;
 import politikei.com.br.politikei.database.DataBase;
 import politikei.com.br.politikei.fragment.FragmentProjetosLei;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProjetosL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.logo);
 
         Handler handler = new Handler();
