@@ -2,14 +2,14 @@ package politikei.com.br.politikei.datatype.request;
 
 public class FacebookLoginRequest {
     private String uuid;
-    private String token;
+    private String accessToken;
 
     public void setUUID(String uuid) {
         this.uuid = uuid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
 }

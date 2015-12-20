@@ -33,9 +33,8 @@ import politikei.com.br.politikei.network.GsonRequest;
 import politikei.com.br.politikei.network.NetworkRequestQueue;
 
 public class LoginActivity extends AppCompatActivity implements Response.Listener<LoginResponse>, Response.ErrorListener{
-    private final static String LOGIN_API = "https://politikei-api.herokuapp.com/api/v1/auth";
-    private final static String FB_LOGIN_API = "https://politikei-api.herokuapp.com/api/v1/facebookauth";
-    private final static String RETRIEVE_PASSWD_API = "https://politikei-api.herokuapp.com/api/v1/retrievepasswd";
+    //private final static String API_URL = "http://192.168.14.2:8080/politikei_api/api/v1/";
+    private final static String API_URL = "https://politikei-api.herokuapp.com/api/v1/";
 
     private RequestQueue mQueue;
     private ProgressDialog _progressBar;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 login.setEmail(mUser);
                 login.setPassword(strPasswd);
 
-                GsonRequest gsonRequest = new GsonRequest(LOGIN_API, LoginResponse.class, null, LoginActivity.this, LoginActivity.this, login);
+                GsonRequest gsonRequest = new GsonRequest(API_URL + "auth", LoginResponse.class, null, LoginActivity.this, LoginActivity.this, login);
 
                 //Making the request
                 mQueue.add(gsonRequest);
@@ -76,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
 
         //Facebook Login
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_fb_button);
-        loginButton.setReadPermissions("public_profile", "user_friends");
+        loginButton.setReadPermissions("public_profile", "user_friends", "email");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -84,10 +83,11 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 FacebookLoginRequest login = new FacebookLoginRequest();
                 mUser = loginResult.getAccessToken().getUserId();
                 login.setUUID(mUser);
-                login.setToken(loginResult.getAccessToken().getToken());
+                String accessToken = loginResult.getAccessToken().getToken();
+                login.setAccessToken(accessToken);
                 mIsFacebookAccount = true;
 
-                GsonRequest gsonRequest = new GsonRequest(FB_LOGIN_API, LoginResponse.class, null, LoginActivity.this, LoginActivity.this, login);
+                GsonRequest gsonRequest = new GsonRequest(API_URL + "auth/facebook", LoginResponse.class, null, LoginActivity.this, LoginActivity.this, login);
 
                 //Making the request
                 mQueue.add(gsonRequest);
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                     LoginRequest login = new LoginRequest();
                     login.setEmail(strLogin);
 
-                    GsonRequest gsonRequest = new GsonRequest(RETRIEVE_PASSWD_API, EmptyResponse.class, null, new Response.Listener() {
+                    GsonRequest gsonRequest = new GsonRequest(API_URL + "retrievepasswd", EmptyResponse.class, null, new Response.Listener() {
                         @Override
                         public void onResponse(Object response) {
                             cancelLoading();
